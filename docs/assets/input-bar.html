@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!--
+  input-bar.html —— WorkBuddy 输入框工具栏的等比复原（用于生成 README 演示动图）
+  状态由 URL hash 控制：#0 草稿  #1 悬停  #2 优化中  #3 结果  #4 还原
+  生成方式见 build-demo.mjs。此文件不参与插件运行，仅用于产出文档配图。
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>WorkBuddy 输入框工具栏</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 880px; height: 300px; overflow: hidden; }
+  body {
+    background: #f7f8fa;
+    font-family: system-ui, -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif;
+    display: flex; align-items: center; justify-content: center;
+    -webkit-font-smoothing: antialiased;
+  }
+  .card {
+    width: 800px; height: 196px;
+    background: #ffffff;
+    border: 1px solid #e6e8ec;
+    border-radius: 14px;
+    padding: 16px 18px 12px;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+  }
+  .draft {
+    flex: 1; overflow: hidden;
+    font-size: 15px; line-height: 1.62; color: #1f2329;
+    white-space: pre-wrap; word-break: break-word;
+  }
+  .draft .ph { color: #9aa0a8; }
+  .toolbar { display: flex; align-items: center; gap: 8px; padding-top: 10px; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    height: 30px; padding: 0 12px; border-radius: 15px;
+    background: #f2f3f5; color: #5f6672; font-size: 13px;
+  }
+  .pill .chev { width: 8px; height: 8px; border-right: 1.5px solid #8a9099; border-bottom: 1.5px solid #8a9099; transform: rotate(45deg) translate(-1px, -1px); }
+  .iconbtn {
+    width: 30px; height: 30px; border-radius: 50%; border: none; background: transparent;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 16px; line-height: 1; color: inherit; position: relative;
+  }
+  .iconbtn.hover { background: rgba(127,127,140,0.18); }
+  .iconbtn.busy { cursor: progress; }
+  .spinner {
+    display: inline-block; width: 14px; height: 14px; border: 2px solid #e6e8ec;
+    border-top-color: #6c5ce7; border-radius: 50%;
+  }
+  .badge {
+    margin-left: 4px; font-size: 12px; color: #6c5ce7;
+    background: #f1eefe; border-radius: 10px; padding: 3px 10px;
+    opacity: 0; transition: none;
+  }
+  .badge.show { opacity: 1; }
+  .badge.gray { color: #5f6672; background: #f2f3f5; }
+  .caret {
+    display: inline-block; width: 1.5px; height: 17px; background: #1f2329;
+    vertical-align: -3px; animation: none;
+  }
+  .frames { display: none; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="draft" id="draft"></div>
+    <div class="toolbar">
+      <span class="pill">均衡<span class="chev"></span></span>
+      <button class="iconbtn" id="opt">✨</button>
+      <span class="badge" id="badge"></span>
+      <span style="flex:1"></span>
+      <span class="iconbtn" aria-hidden="true">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#5f6672" stroke-width="1.8" stroke-linecap="round">
+          <rect x="9" y="2.5" width="6" height="11" rx="3"></rect>
+          <path d="M5.5 11.5a6.5 6.5 0 0 0 13 0"></path>
+          <path d="M12 18v3.5"></path>
+        </svg>
+      </span>
+    </div>
+  </div>
+
+<script>
+  var DRAFT = "帮我把上周的销售数据整理成一份周报，发给团队";
+  var RESULT = [
+    "【角色】你是一位资深销售运营分析师",
+    "【任务】基于我提供的销售数据，产出一份可直接发送给团队的周报",
+    "【输入】上周各渠道销售额、订单量与环比数据（表格）",
+    "【输出要求】",
+    "1. 结论先行，核心结论不超过 3 条",
+    "2. 关键指标用表格呈现，必须包含环比变化",
+    "3. 结尾给出 2 条可执行的下一步建议"
+  ].join("\n");
+
+  // 注意：用查询参数而非 hash —— 只改 hash 时浏览器不会重新加载页面，脚本不会重跑，
+  // 会导致每张截图都停在初始状态。
+  var q = new URLSearchParams(location.search);
+  var n = parseInt(q.get("n") || (location.hash || "#0").slice(1), 10) || 0;
+  var draft = document.getElementById("draft");
+  var opt = document.getElementById("opt");
+  var badge = document.getElementById("badge");
+
+  function showBadge(text, gray) {
+    badge.textContent = text;
+    badge.className = "badge show" + (gray ? " gray" : "");
+  }
+
+  if (n === 0) {
+    draft.innerHTML = DRAFT + '<span class="caret"></span>';
+  } else if (n === 1) {
+    draft.innerHTML = DRAFT + '<span class="caret"></span>';
+    opt.className = "iconbtn hover";
+  } else if (n === 2) {
+    draft.innerHTML = DRAFT;
+    opt.className = "iconbtn busy";
+    opt.innerHTML = '<span class="spinner"></span>';
+    showBadge("优化中…", false);
+  } else if (n === 3) {
+    draft.textContent = RESULT;
+    showBadge("已优化 · 再点还原", false);
+  } else if (n === 4) {
+    draft.innerHTML = DRAFT + '<span class="caret"></span>';
+    showBadge("已还原原文", true);
+  }
+</script>
+</body>
+</html>

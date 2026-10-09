@@ -1,0 +1,26 @@
+# ── 本地配置：含 API Key，绝对不要提交 ──────────────────────────────
+config.json
+config.json.*bak
+config.local.json
+
+# ── 守护进程运行时文件（含 pid、会持续变化）────────────────────────
+.watch.lock
+.watch.log
+
+# ── cli.mjs autostart 生成的开机自启脚本（内含本机绝对路径）────────
+start-daemon.vbs
+start-daemon.local.vbs
+
+# ── 打包产物 ───────────────────────────────────────────────────────
+*.zip
+*.zip.sha256
+*.tar.gz
+dist/
+
+# ── 系统 / 编辑器 ──────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+node_modules/

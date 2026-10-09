@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!--
+  social-preview.html —— 生成 GitHub 社交预览图（1200×630）
+  GitHub 的社交预览没有上传 API，只能在仓库 Settings → Social preview 手动上传本文件生成的图片。
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>social preview</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    background: #ffffff;
+    font-family: system-ui, -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    border-left: 14px solid #6c5ce7;
+    padding: 54px 64px 46px;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .main { display: flex; align-items: center; gap: 46px; }
+  .left { flex: 1; }
+  .eyebrow { font-size: 18px; color: #6c5ce7; letter-spacing: .04em; }
+  h1 { font-size: 47px; line-height: 1.32; color: #1f2329; font-weight: 600; margin-top: 18px; }
+  h1 em { font-style: normal; color: #6c5ce7; }
+  .sub { font-size: 21px; line-height: 1.7; color: #5f6672; margin-top: 18px; }
+  .sub .k { color: #1f2329; }
+
+  .card { width: 404px; border: 1px solid #e6e8ec; border-radius: 14px; padding: 18px 18px 20px; }
+  .label { font-size: 12px; color: #8a9099; letter-spacing: .06em; }
+  .draft { font-size: 14px; line-height: 1.6; color: #5f6672; margin-top: 8px; }
+  .arrow { display: flex; align-items: center; gap: 8px; margin: 14px 0; }
+  .arrow .dot { flex: 1; height: 1px; background: #eceef1; }
+  .arrow .spark { width: 26px; height: 26px; border-radius: 50%; background: rgba(127,127,140,0.16); display: flex; align-items: center; justify-content: center; font-size: 14px; }
+  .result { background: #f7f6ff; border-radius: 10px; padding: 12px 14px; }
+  .result div { font-size: 14px; line-height: 1.72; color: #2c2c2a; }
+  .result .y { color: #6c5ce7; }
+
+  .features { display: flex; gap: 16px; margin-top: 4px; }
+  .feat { flex: 1; border: 1px solid #eceef1; border-radius: 12px; padding: 15px 18px; font-size: 16px; line-height: 1.5; color: #5f6672; }
+  .feat b { color: #1f2329; font-weight: 600; }
+
+  .foot { display: flex; align-items: center; gap: 13px; font-size: 18px; color: #8a9099; margin-top: 28px; }
+  .foot .repo { color: #1f2329; }
+  .foot .dot { color: #d9dce1; }
+</style>
+</head>
+<body>
+  <div class="main">
+    <div class="left">
+      <div class="eyebrow">WorkBuddy 输入框插件</div>
+      <h1>点一下，把草稿变成<br><em>结构化提示词</em></h1>
+      <div class="sub">
+        再点一下，还原原文<br>
+        <span class="k">✨ 按钮</span>位于输入框底部工具栏 · 左键优化 · 右键配置
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="label">草稿</div>
+      <div class="draft">帮我把上周的销售数据整理成一份周报，发给团队</div>
+
+      <div class="arrow">
+        <span class="dot"></span>
+        <span class="spark">✨</span>
+        <span class="dot"></span>
+      </div>
+
+      <div class="label">优化后</div>
+      <div class="result" style="margin-top:8px">
+        <div><span class="y">【角色】</span>资深销售运营分析师</div>
+        <div><span class="y">【任务】</span>产出可直接发送的周报</div>
+        <div><span class="y">【要求】</span>结论先行 · 指标含环比</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="features">
+    <div class="feat"><b>单击</b>　把未发送的草稿优化成结构化提示词</div>
+    <div class="feat"><b>再点</b>　还原原文，原始草稿不丢失</div>
+    <div class="feat"><b>右键</b>　配置模型 / API Key / 系统提示词</div>
+  </div>
+
+  <div class="foot">
+    <span class="repo">github.com/Heilampanng/workbuddy-Prompt-Optimization</span>
+    <span class="dot">·</span><span>CDP 注入</span>
+    <span class="dot">·</span><span>零 npm 依赖</span>
+    <span class="dot">·</span><span>MIT</span>
+  </div>
+</body>
+</html>

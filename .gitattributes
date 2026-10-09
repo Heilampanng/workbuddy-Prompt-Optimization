@@ -1,0 +1,19 @@
+# 默认按文本处理，统一用 LF
+* text=auto eol=lf
+
+# 关键：cmd.exe 解析 .bat 时按 OEM 代码页解码。
+# .bat 必须保持 CRLF + 纯 ASCII，否则中文多字节字符会让 cmd 的行偏移漂移，
+# 吞掉后续行开头的字符，产生 'ompt' / 'li.mjs' 这类幽灵命令报错。
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.vbs text eol=crlf
+
+*.mjs  text eol=lf
+*.js   text eol=lf
+*.json text eol=lf
+*.md   text eol=lf
+
+# 禁止 Git 对图片等二进制做换行转换
+*.png binary
+*.jpg binary
+*.ico binary

@@ -1,0 +1,21 @@
+{
+  "name": "prompt-optimize-button",
+  "version": "1.0.1",
+  "private": true,
+  "description": "为 WorkBuddy 输入框注入 ✨ 按钮：单击将草稿优化为结构化提示词，再次单击还原原文。",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "install:run": "node install.mjs",
+    "check": "node install.mjs --check",
+    "release": "node build-release.mjs",
+    "test:proxy": "node test-prompt.mjs",
+    "test:draft": "node test-draft.mjs",
+    "test:panel": "node test-panel.mjs",
+    "test:watch": "node test-watch.mjs",
+    "test:autostart": "node test-autostart.mjs",
+    "test:bat": "node test-bat.mjs"
+  }
+}

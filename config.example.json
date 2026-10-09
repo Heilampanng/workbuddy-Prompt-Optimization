@@ -1,0 +1,9 @@
+{
+  "protocol": "openai",
+  "baseUrl": "https://api.openai.com/v1",
+  "apiKey": "",
+  "model": "gpt-4o-mini",
+  "style": "structured",
+  "port": 9477,
+  "prompt": ""
+}
